@@ -6,17 +6,17 @@ import (
 )
 
 const (
-	// NONE is for unused postitions.
-	NONE = "_"
+	// none is for unused postitions.
+	none = "_"
 
-	// MISS is for missile misses.
-	MISS = "O"
+	// miss is for missile misses.
+	miss = "O"
 
-	// HIT is for hit battleships.
-	HIT = "X"
+	// hit is for hit battleships.
+	hit = "X"
 
-	// ALIVE is for alive battleships.
-	ALIVE = "B"
+	// alive is for alive battleships.
+	alive = "B"
 )
 
 // Battleground defines the battleground for the game.
@@ -53,15 +53,15 @@ func (b *Battleground) Play() []string {
 
 			switch {
 			case !isMissile && isShip:
-				matrix = append(matrix, ALIVE)
+				matrix = append(matrix, alive)
 			case isMissile && isShip:
 				b.Opponent.Hit()
-				matrix = append(matrix, HIT)
+				matrix = append(matrix, hit)
 			case isMissile && !isShip:
 				b.Opponent.Miss()
-				matrix = append(matrix, MISS)
+				matrix = append(matrix, miss)
 			default:
-				matrix = append(matrix, NONE)
+				matrix = append(matrix, none)
 			}
 		}
 	}
