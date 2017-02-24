@@ -32,6 +32,11 @@ func main() {
 		log.Fatal("Could not parse input file")
 	}
 
+	err = cfg.Validate()
+	if err != nil {
+		log.Fatalf("Invalid configuration: %s", err.Error())
+	}
+
 	fmt.Print("Player1\n")
 	ground1 := battleground.NewBattleground(cfg.M, &cfg.Player1, &cfg.Player2)
 	i := 1
