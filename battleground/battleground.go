@@ -48,15 +48,8 @@ func (b *Battleground) Play() []string {
 		for x := 0; x < b.M; x++ {
 			coordinate := coordinates.NewCoordinate(x, y)
 
-			isMissile := false
-			if b.Opponent.Moves.Include(coordinate) {
-				isMissile = true
-			}
-
-			isShip := false
-			if b.Player.ShipPositions.Include(coordinate) {
-				isShip = true
-			}
+			isMissile := b.Opponent.Moves.Include(coordinate)
+			isShip := b.Player.ShipPositions.Include(coordinate)
 
 			switch {
 			case !isMissile && isShip:
