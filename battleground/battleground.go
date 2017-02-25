@@ -25,14 +25,14 @@ type Battleground struct {
 	m int
 
 	// Player represents the first player.
-	Player *player.Player
+	Player player.Playerer
 
 	// Opponent represents the first player.
-	Opponent *player.Player
+	Opponent player.Playerer
 }
 
 // NewBattleground sets up a new battleground.
-func NewBattleground(m int, player, opponent *player.Player) *Battleground {
+func NewBattleground(m int, player, opponent player.Playerer) *Battleground {
 	return &Battleground{
 		m:        m,
 		Player:   player,
@@ -53,8 +53,10 @@ func (b *Battleground) Play() []string {
 		for x := 0; x < b.m; x++ {
 			coordinate := coordinates.NewCoordinate(x, y)
 
-			isMissile := b.Opponent.Moves.Include(coordinate)
-			isShip := b.Player.ShipPositions.Include(coordinate)
+			moves := b.Opponent.Moves()
+			isMissile := moves.Include(coordinate)
+			ships := b.Player.ShipPositions()
+			isShip := ships.Include(coordinate)
 
 			switch {
 			case !isMissile && isShip:

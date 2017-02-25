@@ -17,24 +17,24 @@ func TestConfigValidate(t *testing.T) {
 			config: &Config{
 				S: 1,
 				T: 2,
-				Player1: player.Player{
-					ShipPositions: coordinates.Coordinates{
+				Player1: player.NewPlayer(
+					coordinates.Coordinates{
 						*coordinates.NewCoordinate(0, 0),
 					},
-					Moves: coordinates.Coordinates{
-						*coordinates.NewCoordinate(0, 0),
-						*coordinates.NewCoordinate(0, 1),
-					},
-				},
-				Player2: player.Player{
-					ShipPositions: coordinates.Coordinates{
-						*coordinates.NewCoordinate(0, 0),
-					},
-					Moves: coordinates.Coordinates{
+					coordinates.Coordinates{
 						*coordinates.NewCoordinate(0, 0),
 						*coordinates.NewCoordinate(0, 1),
 					},
-				},
+				),
+				Player2: player.NewPlayer(
+					coordinates.Coordinates{
+						*coordinates.NewCoordinate(0, 0),
+					},
+					coordinates.Coordinates{
+						*coordinates.NewCoordinate(0, 0),
+						*coordinates.NewCoordinate(0, 1),
+					},
+				),
 			},
 			valid: true,
 		},
@@ -42,23 +42,23 @@ func TestConfigValidate(t *testing.T) {
 			config: &Config{
 				S: 1,
 				T: 2,
-				Player1: player.Player{
-					ShipPositions: coordinates.Coordinates{
+				Player1: player.NewPlayer(
+					coordinates.Coordinates{
 						*coordinates.NewCoordinate(0, 0),
 					},
-					Moves: coordinates.Coordinates{
+					coordinates.Coordinates{
 						*coordinates.NewCoordinate(0, 1),
 					},
-				},
-				Player2: player.Player{
-					ShipPositions: coordinates.Coordinates{
+				),
+				Player2: player.NewPlayer(
+					coordinates.Coordinates{
 						*coordinates.NewCoordinate(0, 0),
 					},
-					Moves: coordinates.Coordinates{
+					coordinates.Coordinates{
 						*coordinates.NewCoordinate(0, 0),
 						*coordinates.NewCoordinate(0, 1),
 					},
-				},
+				),
 			},
 			valid: false,
 		},
@@ -66,23 +66,23 @@ func TestConfigValidate(t *testing.T) {
 			config: &Config{
 				S: 1,
 				T: 2,
-				Player1: player.Player{
-					ShipPositions: coordinates.Coordinates{
+				Player1: player.NewPlayer(
+					coordinates.Coordinates{
 						*coordinates.NewCoordinate(0, 0),
 					},
-					Moves: coordinates.Coordinates{
+					coordinates.Coordinates{
 						*coordinates.NewCoordinate(0, 0),
 						*coordinates.NewCoordinate(0, 1),
 					},
-				},
-				Player2: player.Player{
-					ShipPositions: coordinates.Coordinates{
+				),
+				Player2: player.NewPlayer(
+					coordinates.Coordinates{
 						*coordinates.NewCoordinate(0, 0),
 					},
-					Moves: coordinates.Coordinates{
+					coordinates.Coordinates{
 						*coordinates.NewCoordinate(0, 0),
 					},
-				},
+				),
 			},
 			valid: false,
 		},
@@ -90,22 +90,22 @@ func TestConfigValidate(t *testing.T) {
 			config: &Config{
 				S: 1,
 				T: 2,
-				Player1: player.Player{
-					ShipPositions: coordinates.Coordinates{},
-					Moves: coordinates.Coordinates{
+				Player1: player.NewPlayer(
+					coordinates.Coordinates{},
+					coordinates.Coordinates{
 						*coordinates.NewCoordinate(0, 0),
 						*coordinates.NewCoordinate(0, 1),
 					},
-				},
-				Player2: player.Player{
-					ShipPositions: coordinates.Coordinates{
+				),
+				Player2: player.NewPlayer(
+					coordinates.Coordinates{
 						*coordinates.NewCoordinate(0, 0),
 					},
-					Moves: coordinates.Coordinates{
+					coordinates.Coordinates{
 						*coordinates.NewCoordinate(0, 0),
 						*coordinates.NewCoordinate(0, 1),
 					},
-				},
+				),
 			},
 			valid: false,
 		},
@@ -113,22 +113,22 @@ func TestConfigValidate(t *testing.T) {
 			config: &Config{
 				S: 1,
 				T: 2,
-				Player1: player.Player{
-					ShipPositions: coordinates.Coordinates{
+				Player1: player.NewPlayer(
+					coordinates.Coordinates{
 						*coordinates.NewCoordinate(0, 0),
 					},
-					Moves: coordinates.Coordinates{
-						*coordinates.NewCoordinate(0, 0),
-						*coordinates.NewCoordinate(0, 1),
-					},
-				},
-				Player2: player.Player{
-					ShipPositions: coordinates.Coordinates{},
-					Moves: coordinates.Coordinates{
+					coordinates.Coordinates{
 						*coordinates.NewCoordinate(0, 0),
 						*coordinates.NewCoordinate(0, 1),
 					},
-				},
+				),
+				Player2: player.NewPlayer(
+					coordinates.Coordinates{},
+					coordinates.Coordinates{
+						*coordinates.NewCoordinate(0, 0),
+						*coordinates.NewCoordinate(0, 1),
+					},
+				),
 			},
 			valid: false,
 		},

@@ -23,33 +23,33 @@ type Config struct {
 	T int
 
 	// Player1 represents the first player.
-	Player1 player.Player
+	Player1 player.Playerer
 
 	// Player2 represents the first player.
-	Player2 player.Player
+	Player2 player.Playerer
 }
 
 // Validate checks the integrity of the configuration.
 func (c *Config) Validate() error {
-	if len(c.Player1.Moves) != c.T {
+	if len(c.Player1.Moves()) != c.T {
 		return &errInvalidConfig{
 			message: "Player 1 has wrong number of moves",
 		}
 	}
 
-	if len(c.Player2.Moves) != c.T {
+	if len(c.Player2.Moves()) != c.T {
 		return &errInvalidConfig{
 			message: "Player 2 has wrong number of moves",
 		}
 	}
 
-	if len(c.Player1.ShipPositions) != c.S {
+	if len(c.Player1.ShipPositions()) != c.S {
 		return &errInvalidConfig{
 			message: "Player 1 has wrong number of ships",
 		}
 	}
 
-	if len(c.Player2.ShipPositions) != c.S {
+	if len(c.Player2.ShipPositions()) != c.S {
 		return &errInvalidConfig{
 			message: "Player 2 has wrong number of ships",
 		}

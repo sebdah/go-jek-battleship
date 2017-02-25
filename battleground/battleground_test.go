@@ -32,16 +32,18 @@ func TestBattlegroundPlay(t *testing.T) {
 		"missile misses": {
 			battleground: battleground.NewBattleground(
 				2,
-				&player.Player{
-					ShipPositions: coordinates.Coordinates{
+				player.NewPlayer(
+					coordinates.Coordinates{
 						*coordinates.NewCoordinate(0, 0),
 					},
-				},
-				&player.Player{
-					Moves: coordinates.Coordinates{
+					coordinates.Coordinates{},
+				),
+				player.NewPlayer(
+					coordinates.Coordinates{},
+					coordinates.Coordinates{
 						*coordinates.NewCoordinate(0, 1),
 					},
-				},
+				),
 			),
 			result:         []string{"B", "_", "O", "_"},
 			opponentPoints: 0,
@@ -49,16 +51,18 @@ func TestBattlegroundPlay(t *testing.T) {
 		"missile hits": {
 			battleground: battleground.NewBattleground(
 				2,
-				&player.Player{
-					ShipPositions: coordinates.Coordinates{
+				player.NewPlayer(
+					coordinates.Coordinates{
 						*coordinates.NewCoordinate(0, 0),
 					},
-				},
-				&player.Player{
-					Moves: coordinates.Coordinates{
+					coordinates.Coordinates{},
+				),
+				player.NewPlayer(
+					coordinates.Coordinates{},
+					coordinates.Coordinates{
 						*coordinates.NewCoordinate(0, 0),
 					},
-				},
+				),
 			),
 			opponentPoints: 1,
 			result:         []string{"X", "_", "_", "_"},
@@ -66,20 +70,22 @@ func TestBattlegroundPlay(t *testing.T) {
 		"multiple hits and misses": {
 			battleground: battleground.NewBattleground(
 				2,
-				&player.Player{
-					ShipPositions: coordinates.Coordinates{
+				player.NewPlayer(
+					coordinates.Coordinates{
 						*coordinates.NewCoordinate(0, 0),
 						*coordinates.NewCoordinate(0, 1),
 						*coordinates.NewCoordinate(1, 1),
 					},
-				},
-				&player.Player{
-					Moves: coordinates.Coordinates{
+					coordinates.Coordinates{},
+				),
+				player.NewPlayer(
+					coordinates.Coordinates{},
+					coordinates.Coordinates{
 						*coordinates.NewCoordinate(0, 0),
 						*coordinates.NewCoordinate(0, 1),
 						*coordinates.NewCoordinate(1, 0),
 					},
-				},
+				),
 			),
 			opponentPoints: 1,
 			result:         []string{"X", "O", "X", "B"},

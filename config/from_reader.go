@@ -11,10 +11,9 @@ import (
 
 // FromReader builds a configuration object from a file input source.
 func FromReader(reader io.Reader) (*Config, error) {
-	config := &Config{
-		Player1: player.Player{},
-		Player2: player.Player{},
-	}
+	var p1Ships, p1Moves coordinates.Coordinates
+	var p2Ships, p2Moves coordinates.Coordinates
+	config := &Config{}
 
 	scanner := bufio.NewScanner(reader)
 	for line := 0; scanner.Scan(); line++ {
@@ -41,7 +40,7 @@ func FromReader(reader io.Reader) (*Config, error) {
 				return nil, err
 			}
 
-			config.Player1.ShipPositions = cs
+			p1Ships = cs
 
 		case 3:
 			cs, err := coordinates.ParseCoordinates(scanner.Text())
@@ -49,7 +48,7 @@ func FromReader(reader io.Reader) (*Config, error) {
 				return nil, err
 			}
 
-			config.Player2.ShipPositions = cs
+			p2Ships = cs
 
 		case 4:
 			t, err := strconv.Atoi(scanner.Text())
@@ -60,22 +59,25 @@ func FromReader(reader io.Reader) (*Config, error) {
 			config.T = t
 
 		case 5:
-			moves, err := coordinates.ParseCoordinates(scanner.Text())
+			cs, err := coordinates.ParseCoordinates(scanner.Text())
 			if err != nil {
 				return nil, err
 			}
 
-			config.Player1.Moves = moves
+			p1Moves = cs
 
 		case 6:
-			moves, err := coordinates.ParseCoordinates(scanner.Text())
+			cs, err := coordinates.ParseCoordinates(scanner.Text())
 			if err != nil {
 				return nil, err
 			}
 
-			config.Player2.Moves = moves
+			p2Moves = cs
 		}
 	}
+
+	config.Player1 = player.NewPlayer(p1Ships, p1Moves)
+	config.Player2 = player.NewPlayer(p2Ships, p2Moves)
 
 	return config, nil
 }

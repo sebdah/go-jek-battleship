@@ -52,10 +52,10 @@ func main() {
 	}
 	defer outputFileHandle.Close()
 
-	ground := battleground.NewBattleground(cfg.M, &cfg.Player1, &cfg.Player2)
+	ground := battleground.NewBattleground(cfg.M, cfg.Player1, cfg.Player2)
 	playBoard("Player1", ground, outputFileHandle)
 	outputFileHandle.WriteString("\n")
-	ground = battleground.NewBattleground(cfg.M, &cfg.Player2, &cfg.Player1)
+	ground = battleground.NewBattleground(cfg.M, cfg.Player2, cfg.Player1)
 	playBoard("Player2", ground, outputFileHandle)
 
 	outputFileHandle.WriteString(fmt.Sprintf("\nP1: %d\n", cfg.Player1.Points()))
