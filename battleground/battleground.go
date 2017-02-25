@@ -21,8 +21,8 @@ const (
 
 // Battleground defines the battleground for the game.
 type Battleground struct {
-	// M defines the size of the battleground. 0 < M < 10.
-	M int
+	// m defines the size of the battleground. 0 < m < 10.
+	m int
 
 	// Player represents the first player.
 	Player *player.Player
@@ -34,18 +34,23 @@ type Battleground struct {
 // NewBattleground sets up a new battleground.
 func NewBattleground(m int, player, opponent *player.Player) *Battleground {
 	return &Battleground{
-		M:        m,
+		m:        m,
 		Player:   player,
 		Opponent: opponent,
 	}
+}
+
+// M returns the size of the one side of the battleground.
+func (b *Battleground) M() int {
+	return b.m
 }
 
 // Play is starting the game.
 func (b *Battleground) Play() []string {
 	matrix := []string{}
 
-	for y := 0; y < b.M; y++ {
-		for x := 0; x < b.M; x++ {
+	for y := 0; y < b.m; y++ {
+		for x := 0; x < b.m; x++ {
 			coordinate := coordinates.NewCoordinate(x, y)
 
 			isMissile := b.Opponent.Moves.Include(coordinate)

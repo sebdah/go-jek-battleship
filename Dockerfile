@@ -7,6 +7,4 @@ WORKDIR /go/src/github.com/sebdah/go-jek-battleship/
 
 RUN go build -o /go/bin/battleship ./cmd
 
-EXPOSE 9000
-
 CMD ["true"]

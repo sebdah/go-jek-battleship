@@ -18,7 +18,8 @@ run: $(ENVIRONMENT)
 	$(info --- Let the battle begin!)
 	@docker-compose run --rm \
 		app \
-		/go/bin/battleship -input /data/input.txt
+		/go/bin/battleship -input /data/input.txt -output /data/output.txt
+	$(info --- Done!)
 
 .PHONY: test
 test: $(ENVIRONMENT)
